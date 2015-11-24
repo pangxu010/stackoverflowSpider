@@ -32,7 +32,7 @@ public class ErrorDialog extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("我知道了");
+				JButton okButton = new JButton("鎴戠煡閬撲簡");
 				okButton.addActionListener(new ActionListener(){
 					@Override
 					public void actionPerformed(ActionEvent arg0) {

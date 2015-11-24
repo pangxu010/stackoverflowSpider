@@ -25,12 +25,12 @@ public class SaveThread extends ThreadInfo {
     private CloseableHttpClient httpClient = null;
     
     /**
-     * ÎÄ¼ş±£´æÏß³Ì
-     * @param hashCode hashÖµ
-     * @param path Â·¾¶
-     * @param threadType Ïß³ÌÀàĞÍ
-	 * @param contentType ÄÚÈİÀàĞÍ
-     * @param context ÉÏÏÂÎÄ
+     * æ–‡ä»¶ä¿å­˜çº¿ç¨‹
+     * @param hashCode hashå€¼
+     * @param path è·¯å¾„
+     * @param threadType çº¿ç¨‹ç±»å‹
+	 * @param contentType å†…å®¹ç±»å‹
+     * @param context ä¸Šä¸‹æ–‡
      */
 	public SaveThread(long hashCode,String path,int threadType,int contentType,Context context){
 		super(hashCode, path, threadType,contentType, context);
@@ -38,20 +38,20 @@ public class SaveThread extends ThreadInfo {
 
 
 	/**
-	 * ¸ñÊ½»¯ÎÄ¼şÃûÒÔ±£´æµ½´ÅÅÌ
-	 * @param fileName ÎÄ¼şÃû
-	 * @return ¸ñÊ½»¯ºóµÄÎÄ¼şÃû
+	 * æ ¼å¼åŒ–æ–‡ä»¶åä»¥ä¿å­˜åˆ°ç£ç›˜
+	 * @param fileName æ–‡ä»¶å
+	 * @return æ ¼å¼åŒ–åçš„æ–‡ä»¶å
 	 */
 	public static String formatFileName(String fileName){
-//		ĞÇºÅ (*)
-//		ÊúÏß (|)
-//		·´Ğ±¸Ü (\)
-//		Ã°ºÅ (:)
-//		Ë«ÒıºÅ (¡°)
-//		Ğ¡ÓÚºÅ (<)
-//		´óÓÚºÅ (>)
-//		ÎÊºÅ (?)
-//		ÕıĞ±¸Ü (/)
+//		æ˜Ÿå· (*)
+//		ç«–çº¿ (|)
+//		åæ–œæ  (\)
+//		å†’å· (:)
+//		åŒå¼•å· (â€œ)
+//		å°äºå· (<)
+//		å¤§äºå· (>)
+//		é—®å· (?)
+//		æ­£æ–œæ  (/)
 		String[] replaceArray = new String[]{"\\","/",":","*","?","\"","<",">","|"};
 
 
@@ -66,18 +66,18 @@ public class SaveThread extends ThreadInfo {
 	}
 
 	/**
-	 * ¸ñÊ½»¯Â·¾¶
+	 * æ ¼å¼åŒ–è·¯å¾„
 	 */
 	public String formatPath(String path){
 
 
 			Map<String,String> replaceMap = new HashMap<>();
-			replaceMap.put("¡¯","'");
-			replaceMap.put("¡°","\"");
+			replaceMap.put("â€™","'");
+			replaceMap.put("â€œ","\"");
 			replaceMap.put("\\\\","\\");
-			replaceMap.put("°Ù·ÖºÅ","%");
-			replaceMap.put("£¿","?");
-			replaceMap.put("ÏÂ»®Ïß","_");
+			replaceMap.put("ç™¾åˆ†å·","%");
+			replaceMap.put("ï¼Ÿ","?");
+			replaceMap.put("ä¸‹åˆ’çº¿","_");
 			Iterator iterator = replaceMap.keySet().iterator();
 			String key = null;
 
@@ -101,7 +101,7 @@ public class SaveThread extends ThreadInfo {
 			response = httpClient.execute(httpget);
 			int code = response.getStatusLine().getStatusCode();
                         switch(code){
-                        //TODO ÎÄ¼şÂ·¾¶ÒªĞŞ¸ÄµÄÎÊÌâ
+                        //TODO æ–‡ä»¶è·¯å¾„è¦ä¿®æ”¹çš„é—®é¢˜
                             case HTTP_OK:
                                 HttpEntity httpEntity = response.getEntity();
                                 InputStream inputStream = httpEntity.getContent();
@@ -122,7 +122,7 @@ public class SaveThread extends ThreadInfo {
                                 }
                                 
                                 path = filePath;
-                                //¹Ø±ÕÊäÈëÁ÷
+                                //å…³é—­è¾“å…¥æµ
                                 if(inputStream != null){
                                     inputStream.close();
                                 }
@@ -131,12 +131,12 @@ public class SaveThread extends ThreadInfo {
                                 }
 
 								updateThreadCount();
-								printThreadInfo("ÔËĞĞ½áÊø");
+								printThreadInfo("è¿è¡Œç»“æŸ");
                                 new ResolveThread(hashCode, filePath, ++threadType,this.getContentType(),context);
 
 								break;
                             case HTTP_BLOCK:
-                            	printThreadInfo("ÍøÂçÁ¬½ÓÊ§°Ü");
+                            	printThreadInfo("ç½‘ç»œè¿æ¥å¤±è´¥");
 
 								this.updateThreadRunFailInfo();
                                 break;
@@ -146,7 +146,7 @@ public class SaveThread extends ThreadInfo {
 
 			this.updateThreadRunFailInfo();
 
-			printThreadInfoError("±£´æÊ§°Ü",e);
+			printThreadInfoError("ä¿å­˜å¤±è´¥",e);
 			e.printStackTrace();
 		} 
 		

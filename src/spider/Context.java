@@ -23,7 +23,7 @@ public class Context extends Thread {
 		return tag;
 	}
 
-	//¹Ø¼ü×Ö
+	//å…³é”®å­—
 	private String keyWord = null;
 
 	public String getKeyWord() {
@@ -34,7 +34,7 @@ public class Context extends Thread {
 		this.keyWord = keyWord;
 	}
 
-	//Êä³öÎÄ¼şÂ·¾¶
+	//è¾“å‡ºæ–‡ä»¶è·¯å¾„
 	private String outputFilePath = null;
 
 	public String getOutputFilePath() {
@@ -45,7 +45,7 @@ public class Context extends Thread {
 		this.outputFilePath = outputFilePath;
 	}
 
-	//×î´óÏß³ÌÊı
+	//æœ€å¤§çº¿ç¨‹æ•°
 	private int maxThreadNumber = 0;
 
 	public void setMaxThreadNumber(int value) {
@@ -56,7 +56,7 @@ public class Context extends Thread {
 		return maxThreadNumber;
 	}
 
-	//Êı¾İ¿âÁ¬½Ó³Ø³õÊ¼»¯Á¬½ÓÊı
+	//æ•°æ®åº“è¿æ¥æ± åˆå§‹åŒ–è¿æ¥æ•°
 	private int dataBaseInitialSize = 10;
 
 	public int getDataBaseInitialSize() {
@@ -67,7 +67,7 @@ public class Context extends Thread {
 		this.dataBaseInitialSize = dataBaseInitialSize;
 	}
 
-	//Êı¾İ¿âÁ¬½Ó³Ø×î´óÁ¬½ÓÊı
+	//æ•°æ®åº“è¿æ¥æ± æœ€å¤§è¿æ¥æ•°
 	private int dataBaseMaxConnectionSize = 50;
 
 	public int getDataBaseMaxConnectionSize() {
@@ -81,7 +81,7 @@ public class Context extends Thread {
 	private BasicDataSource ds = null;
 
 	/**
-	 * ³õÊ¼»¯Êı¾İ¿âÁ¬½Ó³Ø
+	 * åˆå§‹åŒ–æ•°æ®åº“è¿æ¥æ± 
 	 */
 	private void initDataBaseConnectionPool() {
 
@@ -103,25 +103,25 @@ public class Context extends Thread {
 		return ds;
 	}
 
-	//HttpClient¶ÔÏó
+	//HttpClientå¯¹è±¡
 	private CloseableHttpClient httpClient = null;
 
 	public HttpClient getHttpClient() {
 		return httpClient;
 	}
 
-	//Ïß³Ì³Ø¶ÔÏó
+	//çº¿ç¨‹æ± å¯¹è±¡
 	private ExecutorService threadPool = null;
 
 	public ExecutorService getThreadPool() {
 		return threadPool;
 	}
 
-	//½âÎö¶ÓÁĞ
+	//è§£æé˜Ÿåˆ—
 	private ThreadList resolveList = null;
-	//±£´æ¶ÓÁĞ
+	//ä¿å­˜é˜Ÿåˆ—
 	private ThreadList saveList = null;
-	//ºÏ²¢¶ÓÁĞ
+	//åˆå¹¶é˜Ÿåˆ—
 	private ThreadList combateList = null;
 
 	public synchronized ThreadList getResolveList() {
@@ -136,7 +136,7 @@ public class Context extends Thread {
 		return combateList;
 	}
 
-	//Ë÷Òı
+	//ç´¢å¼•
 	private int nextIndex = 0;
 
 	public synchronized void increaseNextIndex() {
@@ -144,7 +144,7 @@ public class Context extends Thread {
 	}
 
 	private boolean runFlag = true;
-	//¿ªÊ¼ÔËĞĞ
+	//å¼€å§‹è¿è¡Œ
 	private boolean isRunned = false;
 
 	public void onStartRunning() {
@@ -152,7 +152,7 @@ public class Context extends Thread {
 		saveList = new ThreadList(this, ThreadList.ListType.SAVE_LIST);
 		resolveList = new ThreadList(this, ThreadList.ListType.RESOLVE_LIST);
 		combateList = new ThreadList(this, ThreadList.ListType.COMBATE_LIST);
-		//¸ù¾İÊÇ·ñÔËĞĞ¹ı³õÊ¼»¯¶ÓÁĞ
+		//æ ¹æ®æ˜¯å¦è¿è¡Œè¿‡åˆå§‹åŒ–é˜Ÿåˆ—
 		if (isRunned) {
 			initListFromSQL();
 		} else {
@@ -177,7 +177,7 @@ public class Context extends Thread {
 		combateList.initContent(ThreadInfo.ThreadType.RESOLVED, 20);
 	}
 
-	//Í£Ö¹ÔËĞĞ
+	//åœæ­¢è¿è¡Œ
 	public void onStopRunning() {
 		runFlag = false;
 
@@ -186,10 +186,10 @@ public class Context extends Thread {
 		resolveList.clear();
 		combateList.clear();
 
-		//TODO µÈ´ıÏß³ÌÔËĞĞÍê±ÏÔÚ¹Ø±Õ
+		//TODO ç­‰å¾…çº¿ç¨‹è¿è¡Œå®Œæ¯•åœ¨å…³é—­
 		threadPool.shutdown();
 		stop();
-		//TODO ±£´æÔËĞĞ¹ıµÄĞÅÏ¢
+		//TODO ä¿å­˜è¿è¡Œè¿‡çš„ä¿¡æ¯
 	}
 
 	public Context() {

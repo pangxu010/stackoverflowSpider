@@ -9,13 +9,13 @@ import java.util.List;
 
 public class ThreadList{
 	
-	//Ïß³ÌÊı
+	//çº¿ç¨‹æ•°
 	private static int runningCount = 0;
-	//Ïß³ÌÊıËø
+	//çº¿ç¨‹æ•°é”
 	private static Object runningCountLock = new Object();
 	
 	/**
-	 * »ñµÃÏß³ÌÊı
+	 * è·å¾—çº¿ç¨‹æ•°
 	 * @return
 	 */
 	public static int getRunningCount() {
@@ -25,7 +25,7 @@ public class ThreadList{
 	}
 	
 	/**
-	 * Ïß³ÌÊı×ÔÔö
+	 * çº¿ç¨‹æ•°è‡ªå¢
 	 */
 	public static void increseRunningCount() {
 		synchronized(runningCountLock){
@@ -36,7 +36,7 @@ public class ThreadList{
 
 	
 	/**
-	 * Ïß³ÌÊı¼õÉÙ
+	 * çº¿ç¨‹æ•°å‡å°‘
 	 */
 	public static void decreseRunningCount() {
 		synchronized(runningCountLock){
@@ -44,9 +44,9 @@ public class ThreadList{
 		}
 	}
 	
-	//List¶ÔÏó
+	//Listå¯¹è±¡
 	List<ThreadInfo> list = null;
-	//Ïß³ÌËø
+	//çº¿ç¨‹é”
 	private Object listLock = new Object();
 
 	private int listType;
@@ -66,7 +66,7 @@ public class ThreadList{
 	}
 
 	/**
-	 * Ìí¼ÓÏß³Ìµ½¶ÓÁĞÖĞ
+	 * æ·»åŠ çº¿ç¨‹åˆ°é˜Ÿåˆ—ä¸­
 	 * @param threadInfo
 	 */
 	public synchronized void addThread(ThreadInfo threadInfo){
@@ -75,22 +75,22 @@ public class ThreadList{
 			String log = null;
 			switch(listType){
 				case ListType.SAVE_LIST:
-					log = "ÎÄ¼ş±£´æ¶ÓÁĞ";
+					log = "æ–‡ä»¶ä¿å­˜é˜Ÿåˆ—";
 					break;
 				case ListType.RESOLVE_LIST:
-					log = "ÎÄ¼ş½âÎö¶ÓÁĞ";
+					log = "æ–‡ä»¶è§£æé˜Ÿåˆ—";
 					break;
 				case ListType.COMBATE_LIST:
-					log = "ÎÄ¼şºÏ²¢¶ÓÁĞ";
+					log = "æ–‡ä»¶åˆå¹¶é˜Ÿåˆ—";
 					break;
 			}
 			threadInfo.updateThreadRunningInfo();
-			threadInfo.printThreadInfo("\t ÒÑ¾­Ìí¼Óµ½" + log + "ÖĞ\t¶ÓÁĞ´óĞ¡Îª" + list.size());
+			threadInfo.printThreadInfo("\t å·²ç»æ·»åŠ åˆ°" + log + "ä¸­\té˜Ÿåˆ—å¤§å°ä¸º" + list.size());
 		}
 	}
 
 	/**
-	 * Çå³ıThread¶ÓÁĞ
+	 * æ¸…é™¤Threadé˜Ÿåˆ—
 	 */
 	public void clear(){
 		synchronized (listLock) {
@@ -100,7 +100,7 @@ public class ThreadList{
 	}
 
 	/**
-	 * »ñÈ¡Ïß³Ì
+	 * è·å–çº¿ç¨‹
 	 */
 	public synchronized ThreadInfo getThread() {
 	
@@ -140,22 +140,22 @@ public class ThreadList{
 		String listTypeStr = "";
 		switch(listType){
 			case ListType.SAVE_LIST:
-				listTypeStr = "±£´æ¶ÓÁĞ";
+				listTypeStr = "ä¿å­˜é˜Ÿåˆ—";
 				break;
 			case ListType.RESOLVE_LIST:
-				listTypeStr = "½âÎö¶ÓÁĞ";
+				listTypeStr = "è§£æé˜Ÿåˆ—";
 				break;
 			case ListType.COMBATE_LIST:
-				listTypeStr = "ºÏ²¢¶ÓÁĞ";
+				listTypeStr = "åˆå¹¶é˜Ÿåˆ—";
 				break;
 		}
-		String result = "ListType\t" + listTypeStr + "\t´óĞ¡\t" + list.size();
+		String result = "ListType\t" + listTypeStr + "\tå¤§å°\t" + list.size();
 
 		return result;
 	}
 
 	public synchronized void initContent(int threadType,int size) {
-		//´ÓÊı¾İ¿âÖĞ³õÊ¼»¯Ïß³ÌĞÅÏ¢
+		//ä»æ•°æ®åº“ä¸­åˆå§‹åŒ–çº¿ç¨‹ä¿¡æ¯
 		try {
 			Connection connection = context.getDataBase().getConnection();
 			Statement stmt = (Statement) connection.createStatement();
@@ -166,7 +166,7 @@ public class ThreadList{
 			ResultSet rs = stmt.executeQuery(sqlStr);
 
 			while (rs.next()) {
-					System.out.println("½øÈë¶ÓÁĞ");
+					System.out.println("è¿›å…¥é˜Ÿåˆ—");
 					ThreadInfo threadInfo = null;
 					switch (threadType) {
 						case ThreadInfo.ThreadType.UNSAVE:

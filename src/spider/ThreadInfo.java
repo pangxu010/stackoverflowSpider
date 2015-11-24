@@ -10,20 +10,20 @@ public abstract class ThreadInfo implements Runnable{
 	public int getContentType(){
 		return contentType;
 	}
-	//Ïß³ÌÊÇ·ñÔËĞĞ
+	//çº¿ç¨‹æ˜¯å¦è¿è¡Œ
 	protected boolean isRunned = true;
 	//hashCode
 	protected long hashCode = -1L;
-	//Ïß³ÌÀàĞÍ
+	//çº¿ç¨‹ç±»å‹
 	protected int threadType = 0;
 	//path
 	protected String path = null;
-	//ÉÏÏÂÎÄ
+	//ä¸Šä¸‹æ–‡
 	protected Context context = null;
 
 
 	/**
-	 * ¸üĞÂÏß³ÌÕıÔÚÔËĞĞµÄĞÅÏ¢
+	 * æ›´æ–°çº¿ç¨‹æ­£åœ¨è¿è¡Œçš„ä¿¡æ¯
 	 */
 	public void updateThreadRunningInfo() {
 		++threadType ;
@@ -31,7 +31,7 @@ public abstract class ThreadInfo implements Runnable{
 	}
 
 	/**
-	 * ¸üĞÂÏß³ÌÔËĞĞÊ§°ÜµÄĞÅÏ¢
+	 * æ›´æ–°çº¿ç¨‹è¿è¡Œå¤±è´¥çš„ä¿¡æ¯
 	 */
 	public void updateThreadRunFailInfo(){
 		--threadType;
@@ -58,25 +58,25 @@ public abstract class ThreadInfo implements Runnable{
 		this.contentType = contentType;
 		this.context = context;
 		
-		printThreadInfo("Éú³É");
+		printThreadInfo("ç”Ÿæˆ");
 		insertToSQL();
 	}
 
 
 
 	/**
-	 * ¸ñÊ½»¯´ı²åÈëµ½Êı¾İ¿âÖĞµÄ×Ö·û´®£¬Ê¹Æä·ûºÏSQL¸ñÊ½
-	 * @param string ´ı×ª»¯µÄsql
+	 * æ ¼å¼åŒ–å¾…æ’å…¥åˆ°æ•°æ®åº“ä¸­çš„å­—ç¬¦ä¸²ï¼Œä½¿å…¶ç¬¦åˆSQLæ ¼å¼
+	 * @param string å¾…è½¬åŒ–çš„sql
 	 */
 	private String formatStringToSQL(String string){
 
 		Map<String,String> replaceMap = new HashMap<>();
-		replaceMap.put("'","¡¯");
-		replaceMap.put("\"","¡°");
+		replaceMap.put("'","â€™");
+		replaceMap.put("\"","â€œ");
 		replaceMap.put("\\","\\\\");
-		replaceMap.put("%","°Ù·ÖºÅ");
-		replaceMap.put("?","£¿");
-		replaceMap.put("_", "ÏÂ»®Ïß");
+		replaceMap.put("%","ç™¾åˆ†å·");
+		replaceMap.put("?","ï¼Ÿ");
+		replaceMap.put("_", "ä¸‹åˆ’çº¿");
 		Iterator iterator = replaceMap.keySet().iterator();
 		String key = null;
 
@@ -91,27 +91,27 @@ public abstract class ThreadInfo implements Runnable{
 		String tag = null;
 		switch(threadType){
 			case ThreadType.RESOLVED:
-				tag = "ºÏ²¢Ïß³Ì";
+				tag = "åˆå¹¶çº¿ç¨‹";
 				break;
 			case ThreadType.SAVED:
-				tag = "½âÎöÏß³Ì";
+				tag = "è§£æçº¿ç¨‹";
 				break;
 			case ThreadType.UNSAVE:
-				tag = "±£´æÏß³Ì";
+				tag = "ä¿å­˜çº¿ç¨‹";
 				break;
 
 		}
-		System.out.println("HashCodeÖµ" + hashCode
-				+"\tÂ·¾¶" + path
-				+ "\tÄÚÈİÀàĞÍ" + (contentType==0?"Ë÷Òı":"ÕıÎÄ")
-				+ "\tÏß³ÌÀàĞÍ" + tag + "\t" + extendMsg);
+		System.out.println("HashCodeå€¼" + hashCode
+				+"\tè·¯å¾„" + path
+				+ "\tå†…å®¹ç±»å‹" + (contentType==0?"ç´¢å¼•":"æ­£æ–‡")
+				+ "\tçº¿ç¨‹ç±»å‹" + tag + "\t" + extendMsg);
 	}
 	
 	protected void printThreadInfoError(String extendsMsg,Exception e){
 		printThreadInfo(extendsMsg);
-		System.out.println("HashCodeÖµ" + hashCode
-				+"\tÂ·¾¶" + path
-				+ "\tÏß³ÌÀàĞÍ" + threadType 
+		System.out.println("HashCodeå€¼" + hashCode
+				+"\tè·¯å¾„" + path
+				+ "\tçº¿ç¨‹ç±»å‹" + threadType 
 				+ "\t" + e.getCause() + "\t" + e.getMessage());
 	}
 	
@@ -124,7 +124,7 @@ public abstract class ThreadInfo implements Runnable{
 					+ formatStringToSQL(path) +"','" + threadType +"','" + contentType +"','" + hashCode +"')"
 					+ " ON DUPLICATE KEY UPDATE path = '"+ formatStringToSQL(this.path) +"', threadtype = "+ this.threadType + ";";
 
-			System.out.println("SQL²åÈëÓï¾ä" + sqlStr);
+			System.out.println("SQLæ’å…¥è¯­å¥" + sqlStr);
 			stmt.execute(sqlStr);
 			stmt.close();
 			connection.close();
@@ -147,7 +147,7 @@ public abstract class ThreadInfo implements Runnable{
 	}
 
 	/**
-	 * ¸üĞÂÕıÔÚÔËĞĞµÄÏß³ÌÊıÄ¿
+	 * æ›´æ–°æ­£åœ¨è¿è¡Œçš„çº¿ç¨‹æ•°ç›®
 	 */
 	public void updateThreadCount(){
 		ThreadList.decreseRunningCount();

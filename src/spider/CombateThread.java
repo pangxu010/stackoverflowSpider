@@ -2,11 +2,11 @@ package spider;
 
 public class CombateThread extends ThreadInfo{
 	/**
-     * ÎÄ¼şºÏ²¢Ïß³Ì
-     * @param hashCode hashÖµ
-     * @param path Â·¾¶
-     * @param threadType Ïß³ÌÀàĞÍ
-     * @param context ÉÏÏÂÎÄ
+     * æ–‡ä»¶åˆå¹¶çº¿ç¨‹
+     * @param hashCode hashå€¼
+     * @param path è·¯å¾„
+     * @param threadType çº¿ç¨‹ç±»å‹
+     * @param context ä¸Šä¸‹æ–‡
      */
 	public CombateThread(long hashCode,String path,int threadType,int contentType,Context context){
 		super(hashCode, path, threadType,contentType, context);

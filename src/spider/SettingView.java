@@ -206,10 +206,10 @@ public class SettingView extends JFrame {
 		panel_6.add(outputFilePath_TextField);
 		outputFilePath_TextField.setColumns(10);
 		
-		JButton chooseOutputFilePath_Button = new JButton("Ñ¡ÔñÊä³öÎÄ¼şÂ·¾¶");
+		JButton chooseOutputFilePath_Button = new JButton("é€‰æ‹©è¾“å‡ºæ–‡ä»¶è·¯å¾„");
 		chooseOutputFilePath_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO chooseOutputFilePath_ButtonµÄÊÂ¼şÏìÓ¦
+				//TODO chooseOutputFilePath_Buttonçš„äº‹ä»¶å“åº”
 				FileFilter fileFilter = new FileFilter() {
 
 					@Override
@@ -222,7 +222,7 @@ public class SettingView extends JFrame {
 
 					@Override
 					public String getDescription() {
-						return "ÎÄ¼şÂ·¾¶";
+						return "æ–‡ä»¶è·¯å¾„";
 					}
 
 				};
@@ -248,14 +248,14 @@ public class SettingView extends JFrame {
 		
 		
 		if(!isRunned){
-		start_Button = new JButton("¿ªÊ¼×¥È¡");
+		start_Button = new JButton("å¼€å§‹æŠ“å–");
 		start_Button.addActionListener(new StartRunningListener());
 		}
 		
 		start_Button.setBounds(10, 10, 172, 45);
 		panel_7.add(start_Button);
 		
-		JButton gitHub_Button = new JButton("×÷ÕßGitHub");
+		JButton gitHub_Button = new JButton("ä½œè€…GitHub");
 		gitHub_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				java.net.URI uri = null;
@@ -271,7 +271,7 @@ public class SettingView extends JFrame {
 		gitHub_Button.setBounds(374, 10, 172, 45);
 		panel_7.add(gitHub_Button);
 		
-		JButton blog_Button = new JButton("×÷Õß²©¿Í");
+		JButton blog_Button = new JButton("ä½œè€…åšå®¢");
 		blog_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				java.net.URI uri = null;
@@ -286,7 +286,7 @@ public class SettingView extends JFrame {
 		blog_Button.setBounds(192, 10, 172, 45);
 		panel_7.add(blog_Button);
 		
-		JButton advertise_Button = new JButton("·´À¡½¨Òé");
+		JButton advertise_Button = new JButton("åé¦ˆå»ºè®®");
 		advertise_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				java.net.URI uri = null;
@@ -302,10 +302,10 @@ public class SettingView extends JFrame {
 		panel_7.add(advertise_Button);
 
 
-		JButton databaseConfig_Button = new JButton("ÅäÖÃÊı¾İ¿â");
+		JButton databaseConfig_Button = new JButton("é…ç½®æ•°æ®åº“");
 		databaseConfig_Button.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				//TODO Êı¾İ¿â
+				//TODO æ•°æ®åº“
 				new DataBaseConfig(context).setVisible(true);
 			}
 		});
@@ -336,7 +336,7 @@ public class SettingView extends JFrame {
 						&& key_TextField.getText().trim() != null){
 					context.setKeyWord(key_TextField.getText().trim());
 				}else{
-					new ErrorDialog("¹Ø¼ü×Ö²»ÄÜÎª¿Õ").setVisible(true);
+					new ErrorDialog("å…³é”®å­—ä¸èƒ½ä¸ºç©º").setVisible(true);
 					return;
 				}
 				
@@ -344,31 +344,31 @@ public class SettingView extends JFrame {
 						&& outputFilePath_TextField.getText().trim() != null){
 					context.setOutputFilePath(outputFilePath_TextField.getText().trim());
 				}else{
-					new ErrorDialog("Êä³öÎÄ¼şÂ·¾¶²»ÄÜÎª¿Õ").setVisible(true);
+					new ErrorDialog("è¾“å‡ºæ–‡ä»¶è·¯å¾„ä¸èƒ½ä¸ºç©º").setVisible(true);
 					return;
 				}
 				
 				if(((Integer)threadcount_spinner.getValue()) < 1){
-					new ErrorDialog("Ïß³ÌÊı²»ÄÜĞ¡ÓÚ1").setVisible(true);
+					new ErrorDialog("çº¿ç¨‹æ•°ä¸èƒ½å°äº1").setVisible(true);
 				}else if(((Integer)threadcount_spinner.getValue()) >100){
-					new ErrorDialog("Ïß³ÌÊı²»ÄÜ´óÓÚ100").setVisible(true);
+					new ErrorDialog("çº¿ç¨‹æ•°ä¸èƒ½å¤§äº100").setVisible(true);
 					return;
 				}else{
 					context.setMaxThreadNumber((Integer) threadcount_spinner.getValue());
 				}
 
 				if(!"true".equals(context.getDataBasePass())){
-					new ErrorDialog("Êı¾İ¿âÁ¬½Ó´íÎó£¬ÇëÈ·ÈÏ¡°´´½¨.sql¡±³É¹¦µ¼ÈëÊı¾İ¿âÖĞÓëÓÃ»§Ãû¡¢ÃÜÂëÅäÖÃÕıÈ·").setVisible(true);
+					new ErrorDialog("æ•°æ®åº“è¿æ¥é”™è¯¯ï¼Œè¯·ç¡®è®¤â€œåˆ›å»º.sqlâ€æˆåŠŸå¯¼å…¥æ•°æ®åº“ä¸­ä¸ç”¨æˆ·åã€å¯†ç é…ç½®æ­£ç¡®").setVisible(true);
 					return;
 				}
-				//TODO Tag´¦Àí
+				//TODO Tagå¤„ç†
 				saveConfig();
 				initRunningConfig();
 				context.onStartRunning();
 				
 				start_Button.removeActionListener(this);
 				
-				start_Button.setText("Í£Ö¹ÔËĞĞ");
+				start_Button.setText("åœæ­¢è¿è¡Œ");
 				start_Button.addActionListener(new StopRunningListener());
 			}
 
@@ -476,13 +476,13 @@ public class SettingView extends JFrame {
 		        }   
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.out.println("±£´æÅäÖÃÎÄ¼şÊ§°Ü");
+			System.out.println("ä¿å­˜é…ç½®æ–‡ä»¶å¤±è´¥");
 			e.printStackTrace();
 		}	
 	}
 	
 	private void initView() {
-		// TODO ÅäÖÃÎÄ¼ş½âÎö
+		// TODO é…ç½®æ–‡ä»¶è§£æ
 		
 	        try {
 	            DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
